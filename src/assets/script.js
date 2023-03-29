@@ -38,7 +38,7 @@ function addProductToCart(sku) {
   const product = products.find((p) => p.productId === sku);
 
   if (!product) {
-    console.log(`Product with SKU ${sku} not found.`);
+    
     return;
   }
   // Check if the product is already in the cart
@@ -56,8 +56,6 @@ function addProductToCart(sku) {
       image: product.image,
     });
   }
-
-  console.log(cart);
 }
 /* ################################################### 
         Begin increaseQuantity Function
@@ -69,9 +67,6 @@ function increaseQuantity(productId) {
 
   // Increase the quantity of the product in the cart by 1
   product.quantity++;
-
-  // Log a message to the console to indicate that the product's quantity has been increased
-  console.log(`${product.name} quantity increased to ${product.quantity}`);
 }
 /* ################################################### 
         Begin decreaseQuantity Function
@@ -105,13 +100,10 @@ function removeProductFromCart(productId) {
 
  // if product is not found in cart
  if (productIndex === -1) {
-  console.log(`product with productId number: ${productId} is not found`);
   return;
  }
   // remove product from cart
   cart.splice(productIndex, 1);
- 
- console.log(`Product with productId ${productId} has been removed from the cart.`)
 }
 
 /* ################################################### 
@@ -124,10 +116,9 @@ function cartTotal() {
 
   let totalPaid = 0;
   for (const product of cart) {
-    totalPaid += product.price * product.quantity;
+    totalPaid += amount;
   }
-  return totalPaid;
-  
+  return totalPaid - cartTotal();
 }
 /* ################################################### 
         Begin pay Function
@@ -141,7 +132,7 @@ function pay(amount) {
    ################################################### 
 */
 function emptyCart() {
-  cart.length--;
+  cart.splice(0, cart.length)
 }
 
 module.exports = {
