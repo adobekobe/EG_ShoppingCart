@@ -36,6 +36,7 @@ function addProductToCart(sku) {
   if (cartItem) {
     cartItem.quantity++;
   } else {
+    product.quantity++;
     cart.push({
       productId: product.productId,
       name: product.name,
@@ -77,13 +78,13 @@ function removeProductFromCart(productId) {
 }
 
 function cartTotal() {
-  let total = 0;
+  let totalPaid = 0;
 
   for (const product of cart) {
-    total += product.price * product.quantity;
+    totalPaid += product.price * product.quantity;
   }
 
-  return total;
+  return totalPaid;
 }
 
 function pay(amount) {
