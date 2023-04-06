@@ -76,20 +76,55 @@ function removeProductFromCart(productId) {
     cart.splice(productIndex, 1);
   }
 }
+// Helper Function
+function getProduct(productId, productList) 
+{  return productList.find((item) => item.productId === productId);}
+/*Begin cartTotal Function
+################################################### 
+*/
 
 function cartTotal() {
-  let totalPaid = 0;
-
-  for (const product of cart) {
-    totalPaid += product.price * product.quantity;
-  }
-
-  return totalPaid;
+let total = 0;
+cart.forEach((product) => {
+ total += product.quantity * product.price;
+});
+return (total);
 }
+
+/* 
+     Begin pay Function
+
+*/
+
+// need global totalPaid variable
+let totalPaid = 0;
 
 function pay(amount) {
-  return amount - cartTotal();
+totalPaid += amount;
+
+return totalPaid - cartTotal()
 }
+
+// let remaining = cartTotal();
+// let payment = 0;
+
+// while (remaining > 0) {
+//   payment = prompt(`Cart total is ${remaining.toFixed(2)}. Enter payment amount:`);
+//   payment = parseFloat(payment);
+
+//   if (isNaN(payment)) {
+//     console.log("Invalid payment amount. Please try again.");
+//     continue;
+//   }
+
+//   remaining = pay(payment);
+
+//   if (remaining > 0) {
+//     console.log(`Payment accepted. Remaining balance is ${remaining.toFixed(2)}.`);
+//   } else {
+//     console.log("Thank you for your purchase!");
+//   }
+// }
 
 function emptyCart() {
   cart.splice(0, cart.length);
